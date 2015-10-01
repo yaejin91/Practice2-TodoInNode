@@ -1,0 +1,25 @@
+{
+  "name": "todo_app_node",
+  "version": "0.0.1",
+  "description": "This is a todo app in node.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://yaejin91@bitbucket.org/yaejin91/to-do-list.git"
+  },
+  "author": "Yae Jin Park",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/yaejin91/to-do-list#readme",
+  "dependencies": {
+    "bluebird": "^2.10.1",
+    "body-parser": "^1.14.1",
+    "bookshelf": "^0.8.2",
+    "express": "^4.13.3",
+    "knex": "^0.8.6",
+    "lodash": "^3.10.1",
+    "pg": "^4.4.2"
+  }
+}
