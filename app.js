@@ -6,33 +6,34 @@ var express = require('express'),
 
 //database
 
-var bookshelf = require('./schema');
+var bookshelf = require('./database/schema');
 
-//models
+//modelscd
 
-var Owner = require('./models/owner'),
-	Turtle = require('.models/turtle');
+var List = require('./app/models/list.js'),
+	Item = require('./app/models/item.js');
 
 //collections
 
-var Owners = require('./collections/owners'),
-	Turtles = require('./collections/turtles');
+var Lists = require('./app/collections/lists'),
+	Items = require('./app/collections/items');
 
 //view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app/views'));
 
 //run jade file
 app.set('view engine', 'jade');
 
 //get all owners
+//This is the route
 app.get('/', function (req,res){
-	var owners = Owners;
-	owners.fetch()
+	var lists = Lists;
+	lists.fetch()
 	.then(function (data){
 		console.log(data.toJSON())
 		res.redner('index',{
-			title: 'Owners',
-			data: data
+			title: 'Lists of Things To Do',
+			data: data.toJSON
 		})
 		res.send('Message')
 	})

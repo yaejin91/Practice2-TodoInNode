@@ -1,5 +1,5 @@
 var knex = require('knex')({
-	client = 'pg',
+	client:'pg',
 	connection: {
 		host : 'localhost',
 		user : 'parky',

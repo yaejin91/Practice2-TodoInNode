@@ -1,4 +1,4 @@
-var bookshelf = require('../schema')
+var bookshelf = require('../../database/schema')
 //Because I did the dependency registry, this is possible.
 
 var List = bookshelf.Model.extend({

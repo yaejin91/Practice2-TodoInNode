@@ -1,4 +1,4 @@
-var bookshelf = require('../schema');
+var bookshelf = require('../../database/schema');
 var List = require('../models/list');
 
 //creating Collections
