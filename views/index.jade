@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  ol Owners
+    each val in data
+      p
+      li Name: #{val.name}
+      | More stuff: #{val.smells} 
+      |#{val.canDance}
