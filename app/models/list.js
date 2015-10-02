@@ -7,7 +7,6 @@ var List = bookshelf.Model.extend({
 	items: function (){
 		return this.hasMany('Item', 'list_id')
 	}
-
 })
 
 module.exports = bookshelf.model('List', List)

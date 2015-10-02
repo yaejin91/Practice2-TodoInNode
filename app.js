@@ -5,16 +5,13 @@ var express = require('express'),
 	bodyParser = require('body-parser');
 
 //database
-
 var bookshelf = require('./database/schema');
 
-//modelscd
-
+//models
 var List = require('./app/models/list.js'),
 	Item = require('./app/models/item.js');
 
 //collections
-
 var Lists = require('./app/collections/lists'),
 	Items = require('./app/collections/items');
 
