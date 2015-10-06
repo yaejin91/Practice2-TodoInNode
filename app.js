@@ -16,19 +16,32 @@ var Lists = require('./app/collections/lists'),
 	Items = require('./app/collections/items');
 
 //controllers
-var ListController = require('./app/controllers/list_controller.js');
-var ItemController = require('./app/controllers/item_controller.js');
+var ListController = require('./app/controllers/list_controller.js'),
+	ItemController = require('./app/controllers/item_controller.js');
 
 //view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
+
+//using body parser
+app.use(bodyParser.urlencoded({extended:false}))
 
 //run jade file
 app.set('view engine', 'jade');
 
 //routes for lists
-app.get('/',ListController.index)
+//index
+app.get('/lists',ListController.index)
+
+//show
 app.get('/lists/:id',ListController.show)
-app.post('/lists', ListController.create)
+
+//create
+app.post('/lists/create', ListController.create)
+
+//update
+//to load the template that shows the jade file
+app.get('/lists/edit/:id', ListController.edit)
+app.post('/lists/edit/:id', ListController.update)
 
 //routes for items
 app.get('/items',ItemController.index)

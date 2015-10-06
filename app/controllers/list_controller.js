@@ -7,13 +7,15 @@ var List = require('../models/list');
 //collections
 var Lists = require('../collections/lists');
 
-//List the lists
+//db
+var bookshelf = require('../../database/schema');
+
+//Index
 exports.index = function (req,res){
 	var lists = Lists;
 	lists.fetch()
 	.then(function (data){
-		console.log(data.toJSON())
-		res.render('index',{
+		res.render('lists/index',{
 			title: 'Lists of Things To Do',
 			data: data.toJSON()
 		})
@@ -21,7 +23,7 @@ exports.index = function (req,res){
 	.catch(function (error){
 		console.error(error.stack);
 		req.flash('errors', {'msg': error.message});
-		res.redirect('/');
+		res.redirect('/error');
 	});
 };
 
@@ -32,7 +34,6 @@ exports.show = function (req, res) {
 
 	list.fetch()
 	.then(function (data){
-		console.log(data.toJSON())
 		res.render('lists/show',{
 			title: 'Your Lists',
 			data: data.toJSON()
@@ -40,36 +41,75 @@ exports.show = function (req, res) {
 	})
 	.catch(function (error){
 		console.error(error.stack);
-		req.flash('errors', {'msg': error.message});
-		res.redirect('/');
+		// req.flash('errors', {'msg': error.message});
+		res.redirect('/error');
 	});
 };
 
 //Create
 exports.create = function(req, res){
+	new List({
+		name: req.body.name,
+		description: req.body.description
+	}).save()
+
+	.then(function (data){
+		console.log(data + " created")
+		res.redirect('/lists')
+	})
+
+	.catch(function (error){
+		console.error(error.stack);
+		res.redirect('/error');
+	})
 
 }
 
-// //Create
-// app.post('/lists/create', function (req,res) {
-// 	var lists = new Lists();
-// 	lists.save(function (error){
-// 		if(error) throw error;
+//Update form
+exports.edit = function (req,res){
+	var listId = req.params.id;
+	var list = new List({id: listId});
 
-// 		console.log('List created!');
-// 	})
-// })
+	list.fetch()
+	.then(function (data){
+		res.render('lists/edit',{
+			title: 'Edit Your List',
+			data: data.toJSON()
+		})
+	})
+	.catch(function (error){
+		console.error(error.stack);
+		// req.flash('errors', {'msg': error.message});
+		res.redirect('/error');
+	});
+}
 
-// //Update
-// app.put('/lists/edit', function (req,res) {
+//Update submit
+exports.update = function (req,res) {
+	var listId = req.params.id;
+	var updates = req.body;
 
-// })
+	new List({id: listId})
+	.fetch({require: true})
+	.then(function (list){
+		//list is table name
+		list.save(
+			{
+				'name': req.body.name || list.get('name'), 
+				'description': req.body.description || list.get('description')
+			}
+		)
+		console.log('List updating')
+		res.redirect('/lists')
+	})
+	.catch(function (error){
+		console.error(error.stack);
+		res.redirect('/error');
+	})
+
+}
 
 // //Destroy
-// app.del('/lists/delete', function (req,res) {
+// app.post('/lists/delete', function (req,res) {
 
 // })
-
-// app.listen(3000);
-// console.log('Listening to port 3000');
-

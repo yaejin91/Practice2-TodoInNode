@@ -45,7 +45,7 @@ exports.show = function (req, res) {
 	});
 };
 
-//Create
-exports.create = function(req, res){
+// //Create
+// exports.create = function(req, res){
 	
-}
+// }

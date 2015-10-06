@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+	p This is a paragraph.
+	ol List of Lists
+		each val in data
+			li 
+				p Name: #{val.name}
+				p Description: #{val.description}
+				p
+					a(href="/lists/" + val.id) show list
+	p 
+		form(action='/lists/create', method="POST")
+			div.input
+				span.label Name
+				input(type="text", name="name")
+			div.input
+				span.label Description
+				input(type="text", name="description")
+			div.actions
+				input(type="submit", value="add")

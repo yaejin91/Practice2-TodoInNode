@@ -36,7 +36,7 @@ bookshelf.knex.schema.hasTable('items')
 		bookshelf.knex.schema.createTable('items', function (item){
 			item.increments('id').primary();
 			item.string('list_id',255);
-			item.string('name',150).unique().notNullable();
+			item.string('name',150).notNullable();
 			item.string('description',500).notNullable();
 			item.timestamps();
 		})
