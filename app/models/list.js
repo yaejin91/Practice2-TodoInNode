@@ -9,6 +9,7 @@ var List = bookshelf.Model.extend({
 	}
 })
 
+// module.exports = List;
 module.exports = bookshelf.model('List', List)
 //Now you have the 'List' model inside the bookshelf.
 //All of the code above is getting pushed inside the bookshelf.model ('List')

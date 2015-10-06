@@ -1,18 +1,46 @@
-var express = require('express'),
-    app = express(),
-    router = express.Router(),
-    path = require('path'),
+var path = require('path'),
     bodyParser = require('body-parser');
 
-//database
-var bookshelf = require('./database/schema');
-
 //models
-var	Item = require('./app/models/item');
+var	Item = require('../../app/models/item');
 
 //collections
-var Items = require('./app/collections/items');
+var Items = require('../../app/collections/items');
 
-// view engine setup
-app.set('views', path.join(__dirname, 'app/views'));
-app.set('view engine', 'jade');
+//List the items
+exports.index = function (req,res){
+	var items = Items;
+	items.fetch()
+	.then(function (data){
+		console.log(data.toJSON())
+		res.render('index',{
+			title: 'Items',
+			data: data.toJSON()
+		})
+	})
+	.catch(function (error){
+		console.error(error.stack);
+		req.flash('errors', {'msg': error.message});
+		res.redirect('/');
+	});
+};
+
+//Show
+exports.show = function (req, res) {
+	var itemId = req.params.id;
+	var item = new Item({id: itemId});
+
+	item.fetch()
+	.then(function (data){
+		console.log(data.toJSON())
+		res.render('items/show',{
+			title: 'Your Items',
+			data: data.toJSON()
+		})
+	})
+	.catch(function (error){
+		console.error(error.stack);
+		req.flash('errors', {'msg': error.message});
+		res.redirect('/');
+	});
+};

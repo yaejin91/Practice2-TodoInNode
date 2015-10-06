@@ -1,9 +1,11 @@
 extends layout
 
 block content
-  ol Owners
-    each val in data
-      p
-      li Name: #{val.name}
-      | More stuff: #{val.smells} 
-      |#{val.canDance}
+	p This is a paragraph.
+	ol List of Lists
+		each val in data
+			li 
+				p Name: #{val.name}
+				p Description: #{val.description}
+				p
+					a(href="/items/" + val.id) show item

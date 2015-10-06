@@ -8,12 +8,16 @@ var express = require('express'),
 var bookshelf = require('./database/schema');
 
 //models
-var List = require('./app/models/list.js'),
-	Item = require('./app/models/item.js');
+var List = require('./app/models/list'),
+	Item = require('./app/models/item');
 
 //collections
 var Lists = require('./app/collections/lists'),
 	Items = require('./app/collections/items');
+
+//controllers
+var ListController = require('./app/controllers/list_controller.js');
+var ItemController = require('./app/controllers/item_controller.js');
 
 //view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
@@ -21,24 +25,11 @@ app.set('views', path.join(__dirname, 'app/views'));
 //run jade file
 app.set('view engine', 'jade');
 
-//get all owners
-//This is the route
-app.get('/', function (req,res){
-	var lists = Lists;
-	lists.fetch()
-	.then(function (data){
-		console.log(data.toJSON())
-		res.redner('index',{
-			title: 'Lists of Things To Do',
-			data: data.toJSON
-		})
-		res.send('Message')
-	})
-	.catch(function (error){
-		console.error(error.stack);
-		req.flash('errors', {'msg': error.message});
-		res.redirect('/');
-	});
-});
+//routes
+app.get('/',ListController.index)
+app.get('/lists/:id',ListController.show)
+app.get('/items',ItemController.index)
+app.get('/items/:id',ItemController.show)
 
-app.listen(3000)
+app.listen(3000);
+console.log('Listening to port 3000');

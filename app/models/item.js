@@ -1,4 +1,4 @@
-var bookshelf = require('../../database/schema')
+var bookshelf = require('../../database/schema');
 
 var Item = bookshelf.Model.extend({
 	tableName: 'items',

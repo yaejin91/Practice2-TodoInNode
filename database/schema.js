@@ -6,7 +6,7 @@ var knex = require('knex')({
 		password : 'password',
 		database: 'todo'
 	}
-})
+});
 
 var bookshelf = require('bookshelf')(knex);
 
