@@ -25,9 +25,12 @@ app.set('views', path.join(__dirname, 'app/views'));
 //run jade file
 app.set('view engine', 'jade');
 
-//routes
+//routes for lists
 app.get('/',ListController.index)
 app.get('/lists/:id',ListController.show)
+app.post('/lists', ListController.create)
+
+//routes for items
 app.get('/items',ItemController.index)
 app.get('/items/:id',ItemController.show)
 

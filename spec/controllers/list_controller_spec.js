@@ -2,10 +2,11 @@ var express = require('express'),
     app = express(),
     router = express.Router(),
     path = require('path'),
-    bodyParser = require('body-parser');
-    // httpMocks = require('node-mocks-http')
-
-var ListController = require("../../app/controllers/list_controller.js");
+    bodyParser = require('body-parser'),
+    httpMocks = require('node-mocks-http'),
+    List = require('../../app/models/list'),
+    Lists = require('../../app/collections/lists');
+ 	ListController = require("../../app/controllers/list_controller.js");
 
 describe('ListController', function(){
 
@@ -32,10 +33,20 @@ describe('ListController', function(){
 
 	//Test creating new list
 	it('should create a new list', function(){
-		var list = ListController.create({
-
+		var request = httpMocks.createRequest({
+			method: 'POST',
+			url:'/lists',
+			params:{
+				name: 'Creating a new List',
+				description: 'Create new list success'
+			}
 		});
-		expect(list).toBeTruthy();
+
+		var response = httpMocks.createResponse();
+		ListController.create(request,response);
+		var lists = Lists;
+		var data = lists.fetch();
+		expect(data.length).toEqual(1);
 	});
 
 

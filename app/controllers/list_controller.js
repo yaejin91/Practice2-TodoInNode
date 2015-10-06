@@ -45,6 +45,11 @@ exports.show = function (req, res) {
 	});
 };
 
+//Create
+exports.create = function(req, res){
+
+}
+
 // //Create
 // app.post('/lists/create', function (req,res) {
 // 	var lists = new Lists();

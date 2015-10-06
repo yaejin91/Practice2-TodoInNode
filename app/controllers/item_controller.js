@@ -44,3 +44,8 @@ exports.show = function (req, res) {
 		res.redirect('/');
 	});
 };
+
+//Create
+exports.create = function(req, res){
+	
+}
