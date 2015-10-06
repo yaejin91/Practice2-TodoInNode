@@ -36,12 +36,18 @@ app.get('/lists',ListController.index)
 app.get('/lists/:id',ListController.show)
 
 //create
+// app.post('/lists/create', function (req,res)
+// 	ListController.create
+// )
 app.post('/lists/create', ListController.create)
 
 //update
 //to load the template that shows the jade file
 app.get('/lists/edit/:id', ListController.edit)
 app.post('/lists/edit/:id', ListController.update)
+
+//delete
+app.get('/lists/delete/:id', ListController.destroy)
 
 //routes for items
 app.get('/items',ItemController.index)

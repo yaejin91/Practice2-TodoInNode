@@ -27,12 +27,12 @@ describe('ListController', function(){
 				description: 'Create new list success'
 			}).save()
 
-		.then(function (data){
-			console.log(data.toJSON());
-		})
+		// .then(function (data){
+		// 	console.log(data.toJSON());
+		// })
 		console.log(list.name + " This is the list name");
 		// var data = list.fetch();
-		expect(data.length).toEqual(1);
+		expect(list.length).toBeTruthy();
 	});
 
 	// //Test updating existing lists
@@ -43,7 +43,7 @@ describe('ListController', function(){
 	// 	expect(list).toBeTruthy();
 	// });
 
-	// //Test destorying existing list
+	// //Test deleting existing list
 	// it('should destroy the existing', function(){
 	// 	var id = 1;
 	// 	var list = ListController.destroy(id);

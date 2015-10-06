@@ -109,7 +109,23 @@ exports.update = function (req,res) {
 
 }
 
-// //Destroy
-// app.post('/lists/delete', function (req,res) {
+//Destroy
+exports.destroy = function (req,res){
+	var listId = req.params.id;
+	var updates = req.body;
 
+	new List({id: listId})
+	.fetch({require: true})
+	.then(function (list){
+		//list is table name
+		list.destroy()
+		console.log('Destroy list')
+		res.redirect('/lists')
+	})
+	.catch(function (error){
+		console.error(error.stack);
+		res.redirect('/error');
+	})
+
+}
 // })

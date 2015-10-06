@@ -8,7 +8,12 @@ block content
 				p Name: #{val.name}
 				p Description: #{val.description}
 				p
-					a(href="/lists/" + val.id) show list
+					a(href="/lists/#{val.id}") show
+					span  
+					a(href="/lists/edit/#{val.id}") edit
+					span 
+					a(href="/lists/delete/#{val.id}") delete
+
 	p 
 		form(action='/lists/create', method="POST")
 			div.input
