@@ -55,8 +55,7 @@ exports.create = function(req, res){
 	}).save()
 
 	.then(function (data){
-		console.log(data + " created")
-		res.redirect('/lists')
+		res.redirect('/')
 	})
 
 	.catch(function (error){
@@ -80,7 +79,6 @@ exports.edit = function (req,res){
 	})
 	.catch(function (error){
 		console.error(error.stack);
-		// req.flash('errors', {'msg': error.message});
 		res.redirect('/error');
 	});
 }
@@ -100,7 +98,6 @@ exports.update = function (req,res) {
 				'description': req.body.description || list.get('description')
 			}
 		)
-		console.log('List updating')
 		res.redirect('/')
 	})
 	.catch(function (error){
@@ -120,8 +117,7 @@ exports.destroy = function (req,res){
 	.then(function (list){
 		//list is table name
 		list.destroy()
-		console.log('Destroy list')
-		res.redirect('/lists')
+		res.redirect('/')
 	})
 	.catch(function (error){
 		console.error(error.stack);
