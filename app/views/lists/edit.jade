@@ -1,13 +1,16 @@
 extends ../layout
 
 block content
-	p 
-		form(action='/lists/edit/#{data.id}', method="POST")
-			div.input
-				span.label Name
-				input(type="text", name="name")
-			div.input
-				span.label Description
-				input(type="text", name="description")
-			div.actions
-				input(type="submit", value="add")
+	h4= "You are in list: " + data.name
+	h4= "This list is for: " + data.description
+
+	p= "Change your list name and/or description via form."
+	form(action='/lists/edit/#{data.id}', method="POST")
+		div.input
+			span.label Name
+			input(type="text", name="name")
+		div.input
+			span.label Description
+			input(type="text", name="description")
+		div.actions
+			input(type="submit", value="add")

@@ -32,7 +32,9 @@ exports.show = function (req, res) {
 	var listId = req.params.id;
 	var list = new List({id: listId});
 
-	list.fetch()
+	list.fetch({
+		withRelated: ['items']
+	})
 	.then(function (data){
 		res.render('lists/show',{
 			title: 'Your Lists',
@@ -41,7 +43,6 @@ exports.show = function (req, res) {
 	})
 	.catch(function (error){
 		console.error(error.stack);
-		// req.flash('errors', {'msg': error.message});
 		res.redirect('/error');
 	});
 };
@@ -100,7 +101,7 @@ exports.update = function (req,res) {
 			}
 		)
 		console.log('List updating')
-		res.redirect('/lists')
+		res.redirect('/')
 	})
 	.catch(function (error){
 		console.error(error.stack);
@@ -128,4 +129,3 @@ exports.destroy = function (req,res){
 	})
 
 }
-// })

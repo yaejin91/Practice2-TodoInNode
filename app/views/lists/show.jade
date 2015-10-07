@@ -1,5 +1,26 @@
 extends ../layout
 
 block content
-	p= data.name
-	p= data.description
+	h1= "You are in list: " + data.name
+	h2= "This list is for: " + data.description
+	h4= "Items in Current List"
+	ol
+		each val in data.items
+			li
+				p Item Name: #{val.name}
+				p Item Description: #{val.description}
+				a(href="/lists/#{data.id}/items/#{val.id}") edit
+				span  
+				a(href="/lists/#{data.id}/items/#{val.id}") delete
+
+
+	p 
+		form(action='/lists/#{data.id}', method="POST")
+			div.input
+				span.label Name
+				input(type="text", name="name")
+			div.input
+				span.label Description
+				input(type="text", name="description")
+			div.actions
+				input(type="submit", value="add")

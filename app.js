@@ -30,15 +30,12 @@ app.set('view engine', 'jade');
 
 //routes for lists
 //index
-app.get('/lists',ListController.index)
+app.get('/',ListController.index)
 
 //show
 app.get('/lists/:id',ListController.show)
 
 //create
-// app.post('/lists/create', function (req,res)
-// 	ListController.create
-// )
 app.post('/lists/create', ListController.create)
 
 //update
@@ -50,8 +47,16 @@ app.post('/lists/edit/:id', ListController.update)
 app.get('/lists/delete/:id', ListController.destroy)
 
 //routes for items
-app.get('/items',ItemController.index)
-app.get('/items/:id',ItemController.show)
+//create
+app.post('/lists/:id',ItemController.create)
+
+//update
+//to load the template that shows the jade file
+app.get('/lists/:listId/items/:itemId/', ItemController.edit)
+app.post('/lists/:listId/items/:itemId/', ItemController.update)
+
+//delete
+app.get('/lists/:listId/items/:itemId/', ItemController.destroy)
 
 app.listen(3000);
 console.log('Listening to port 3000');
